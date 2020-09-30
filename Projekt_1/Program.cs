@@ -7,11 +7,14 @@ namespace Projekt_1
         static void Main(string[] args)
         {
 
+            //Defines different variables
             bool usernameCorrect = false;
             bool passwordCorrect = false;
+            int passwordAttempts = 3;
 
             Console.Write("Username: ");
 
+            //Runs the loop until a valid username is entered
             while (!usernameCorrect)
             {
                 string user = Console.ReadLine();
@@ -19,7 +22,7 @@ namespace Projekt_1
                 {
                     usernameCorrect = true;
                     Console.Write("Password: ");
-                    while (!passwordCorrect)
+                    while (!passwordCorrect && passwordAttempts > 0)
                     {
                         string password = Console.ReadLine();
                         if (password == "1234")
@@ -27,19 +30,23 @@ namespace Projekt_1
                             passwordCorrect = true;
                             Console.WriteLine("[ACCESS GRANTED]");
                         }
-                        else
+                        else if (passwordAttempts > 0)
                         {
-                            Console.Write("Wrong password, Try again: ");
+                            passwordAttempts--;
+                            Console.WriteLine("Wrong password (You have " + passwordAttempts + " attempts left)");
+                            if (passwordAttempts > 0)
+                            {
+                                Console.Write("Try again: ");
+                            }
                         }
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Wrong username. Try again: ");
+                    Console.WriteLine("That is not a valid username.\nTry again:");
                 }
             }
-
-            Console.WriteLine("Press ENTER to exit terminal");
+            Console.WriteLine("Press ENTER to exit console");
             Console.ReadLine();
         }
     }
